@@ -1,7 +1,5 @@
 import streamlit as st
 from datetime import date, datetime
-from st_aggrid import AgGrid, GridOptionsBuilder
-from st_aggrid.shared import GridUpdateMode
 import pandas as pd
 from streamlit.proto.SessionState_pb2 import SessionState
 
@@ -9,8 +7,7 @@ import chiller_efficiency as ce
 ce.TEST  = False
 #global df
 
-#session_state = SessionState.get(index_column=None)
-# Initialization
+
 if 'df' not in st.session_state:
     st.session_state['df'] = None
 else:
@@ -117,32 +114,6 @@ with col5:
 dataview = st.dataframe(st.session_state['df'])
 st.image("fig.png")
 
-def aggrid_interactive_table(df: pd.DataFrame):
-    """Creates an st-aggrid interactive table based on a dataframe.
-
-    Args:
-        df (pd.DataFrame]): Source dataframe
-
-    Returns:
-        dict: The selected row
-    """
-    options = GridOptionsBuilder.from_dataframe(
-        df, enableRowGroup=True, enableValue=True, enablePivot=True
-    )
-
-    options.configure_side_bar()
-
-    options.configure_selection("single")
-    selection = AgGrid(
-        df,
-        enable_enterprise_modules=True,
-        gridOptions=options.build(),
-        theme="light",
-        update_mode=GridUpdateMode.MODEL_CHANGED,
-        allow_unsafe_jscode=True,
-    )
-
-    return selection
 
 
 
