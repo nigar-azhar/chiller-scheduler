@@ -6,14 +6,16 @@ import requests
 import matplotlib.pyplot as plt
 import os
 import glob
-WDPATH = os.getcwd()
+from pathlib import Path
+WDPATH = Path(__file__).resolve().parent.__str__()
+#.__str__()#os.getcwd()
 
 TEST = False#True
 
 PATH = WDPATH + '/data/'#'data/'/Users/nigarbutt/PycharmProjects/Chiller
 FILE_NAME = PATH + 'data-2018-2021.xlsx'
 print("\n\n\n+++++++++++++++++++++++++\n")
-print(glob.glob('*.xlsx'))
+print(WDPATH)
 print("\n\n\n+++++++++++++++++++++++++\n")
 # important keys/column names
 TEMPERATURE_KEY = 'Wetbulb AVG'
@@ -1219,8 +1221,8 @@ def discharge_time_remaining_provided_refrigeration_tonage(required_refrigeratio
 
 
 
-#if __name__ == "__main__":
-    #print(glob.glob())
+if __name__ == "__main__":
+    print(WDPATH)
     #day = 17
     #month = 7
     #year = 2022
